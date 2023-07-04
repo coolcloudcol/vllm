@@ -1,4 +1,5 @@
-# Adapted from https://github.com/lm-sys/FastChat/blob/168ccc29d3f7edc50823016105c024fe2282732a/fastchat/protocol/openai_api_protocol.py
+# Adapted from
+# https://github.com/lm-sys/FastChat/blob/168ccc29d3f7edc50823016105c024fe2282732a/fastchat/protocol/openai_api_protocol.py
 import time
 from typing import Dict, List, Literal, Optional, Union
 
@@ -73,7 +74,7 @@ class ChatCompletionRequest(BaseModel):
 
 class CompletionRequest(BaseModel):
     model: str
-    prompt: str
+    prompt: Union[str, List[str]]
     suffix: Optional[str] = None
     max_tokens: Optional[int] = 16
     temperature: Optional[float] = 1.0
@@ -98,7 +99,8 @@ class LogProbs(BaseModel):
     text_offset: List[int] = Field(default_factory=list)
     token_logprobs: List[Optional[float]] = Field(default_factory=list)
     tokens: List[str] = Field(default_factory=list)
-    top_logprobs: List[Optional[Dict[str, float]]] = Field(default_factory=list)
+    top_logprobs: List[Optional[Dict[str,
+                                     float]]] = Field(default_factory=list)
 
 
 class CompletionResponseChoice(BaseModel):
